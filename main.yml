@@ -9,6 +9,3 @@
     - role: install_servers
       tags:
         - install_servers
-    - role: the_other_role
-      tags: 
-        - 
