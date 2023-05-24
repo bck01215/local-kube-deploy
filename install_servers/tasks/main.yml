@@ -1,0 +1,7 @@
+---
+# tasks file for install-servers
+- name: Add Hashicorp Repo
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    description: Hashicorp Repo
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo

@@ -1,0 +1,14 @@
+---
+- name: Install Nomad and Consuld
+  hosts: all
+  become: true
+  become_user: root
+  remote_user: ansible
+  become_method: sudo
+  roles:
+    - role: install_servers
+      tags:
+        - install_servers
+    - role: the_other_role
+      tags: 
+        - 
