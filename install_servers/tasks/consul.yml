@@ -5,7 +5,7 @@
     state: latest
 
 - name: Add Firewall rules
-  ansiible.builtin.firewalld:
+  ansible.builtin.firewalld:
     state: "enabled"
     port: "{{ item }}"
     immediate: "yes"
@@ -22,7 +22,7 @@
     - 8600/udp
 
 - name: copy consul file
-  ansiible.builtin.template:
+  ansible.builtin.template:
     src: consul.hcl
     dest: /etc/consul.d/consul.hcl
     owner: "consul"
