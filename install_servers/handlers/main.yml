@@ -1,2 +1,11 @@
 ---
 # handlers file for install-servers
+- name: Restart Consul
+  ansible.builtin.systemd:
+    name: consul
+    state: restarted
+
+- name: Restart Nomad
+  ansible.builtin.systemd:
+    name: nomad
+    state: restarted

@@ -21,6 +21,10 @@
     - 8600/tcp
     - 8600/udp
 
+- name: Debug Default address
+  debug:
+    msg: "It should be a 192 address for local testing {{vars.ansible_all_ipv4_addresses[1]}}"
+
 - name: copy consul file
   ansible.builtin.template:
     src: consul.hcl
@@ -28,9 +32,10 @@
     owner: "consul"
     group: "consul"
     mode: "0640"
+  notify: Restart Consul
 
 - name: Start and Enable Consul
   ansible.builtin.systemd:
     name: consul
-    state: restarted
+    state: started
     enabled: true
