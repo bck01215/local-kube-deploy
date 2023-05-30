@@ -9,7 +9,7 @@ ui_config{
 server = true
 client_addr = "0.0.0.0"
 
-advertise_addr = "{{vars.ansible_all_ipv4_addresses[1]}}"
+advertise_addr = "{{vars.ansible_eth1.ipv4.address}}"
 
 bootstrap_expect=3
 

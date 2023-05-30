@@ -4,9 +4,9 @@ data_dir  = "/opt/nomad/data"
 bind_addr = "0.0.0.0"
 
 advertise {
- http = "{{vars.ansible_all_ipv4_addresses[1]}}"
- rpc = "{{vars.ansible_all_ipv4_addresses[1]}}"
- serf = "{{vars.ansible_all_ipv4_addresses[1]}}"
+ http = "{{vars.ansible_eth1.ipv4.address}}"
+ rpc = "{{vars.ansible_eth1.ipv4.address}}"
+ serf = "{{vars.ansible_eth1.ipv4.address}}"
 }
 server {
   enabled          = true

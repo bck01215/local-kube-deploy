@@ -5,6 +5,7 @@
   become_user: root
   remote_user: ansible
   become_method: sudo
+ 
   roles:
     - role: install_servers
       tags:
