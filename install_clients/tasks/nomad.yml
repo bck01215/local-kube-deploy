@@ -1,0 +1,32 @@
+---
+- name: Install nomad
+  ansible.builtin.dnf:
+    name: nomad
+    state: latest
+
+- name: Add Firewall rules for Nomad
+  ansible.builtin.firewalld:
+    state: "enabled"
+    port: "{{ item }}"
+    immediate: "yes"
+    permanent: "yes"
+  loop:
+    - 4646/tcp
+    - 4647/tcp
+    - 4648/tcp
+    - 4648/udp
+
+- name: copy Nomad file
+  ansible.builtin.template:
+    src: nomad.hcl
+    dest: /etc/nomad.d/nomad.hcl
+    owner: "nomad"
+    group: "nomad"
+    mode: "0640"
+  notify: Restart Nomad
+
+- name: Start and Enable Nomad
+  ansible.builtin.systemd:
+    name: nomad
+    state: started
+    enabled: true

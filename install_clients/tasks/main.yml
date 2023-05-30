@@ -1,2 +1,32 @@
 ---
-# tasks file for install_clients
+- name: Add Hashicorp Repo
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    description: Hashicorp Repo
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+  when:
+    - ansible_facts['distribution'] == "RHEL"
+
+- name: Add Hashicorp Repo
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    description: Hashicorp Repo
+    baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+  when:
+    - ansible_facts['distribution'] == "Fedora"
+
+- name: Add Podman
+  ansible.builtin.dnf:
+    name: podman
+    state: latest
+
+- name: Start and Enable Podman
+  ansible.builtin.systemd:
+    name: podman
+    state: started
+    enabled: yes
+
+- import_tasks: consul.yml
+- import_tasks: nomad.yml
