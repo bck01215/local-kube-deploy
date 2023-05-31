@@ -16,6 +16,26 @@
     - 4648/tcp
     - 4648/udp
 
+- name: "Download and unarchive Podman plguin - {{ podman_plugin_url }}"
+  unarchive:
+    src: "{{ podman_plugin_url }}"
+    dest: /opt/nomad/data/plugins/
+    creates: /opt/nomad/data/plugins/nomad-driver-podman
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
+  notify: Restart Nomad
+  # environment:
+  #   https_proxy: http://quidproxy.liberty.edu:3128
+
+- name: Add plugin dir Nomad
+  ansible.builtin.file:
+    path: /opt/nomad/data/plugins
+    state: directory
+    mode: "0755"
+  notify: Restart Nomad
+
 - name: copy Nomad file
   ansible.builtin.template:
     src: nomad.hcl

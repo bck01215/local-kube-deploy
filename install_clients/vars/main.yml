@@ -1,2 +1,3 @@
 ---
 # vars file for install_clients
+podman_plugin_url: https://releases.hashicorp.com/nomad-driver-podman/0.4.2/nomad-driver-podman_0.4.2_linux_amd64.zip
