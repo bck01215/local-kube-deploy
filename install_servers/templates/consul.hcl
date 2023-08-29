@@ -5,6 +5,13 @@ data_dir = "/opt/consul"
 ui_config{
   enabled = true
 }
+ports {
+  grpc = 8502
+}
+
+connect {
+  enabled = true
+}
 
 server = true
 client_addr = "0.0.0.0"

@@ -1,17 +1,16 @@
-# ---
-# - name: Install Nomad and Consul Server
-#   hosts: servers
-#   become: true
-#   become_user: root
-#   remote_user: vagrant
-#   become_method: sudo
-
-#   roles:
-#     - role: install_servers
-#       tags:
-#         - install_servers
-
 ---
+- name: Install Nomad and Consul Server
+  hosts: servers
+  become: true
+  become_user: root
+  remote_user: vagrant
+  become_method: sudo
+
+  roles:
+    - role: install_servers
+      tags:
+        - install_servers
+
 - name: Install Nomad and Consul Client
   hosts: clients
   become: true

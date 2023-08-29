@@ -15,6 +15,13 @@ server {
 client {
   enabled = true
   servers =  [ "{{ vars.groups.servers | map('quote') | join('", "') }}"]
+{%for item in apps %}  
+
+  host_volume "vol-{{item}}" {
+    path = "/opt/nomad/data/volumes/{{item}}"
+    read_only = false
+  }
+{% endfor %}
 }
 
 plugin "nomad-driver-podman" {
@@ -25,3 +32,7 @@ plugin "nomad-driver-podman" {
     }
   }
 }
+consul {
+  address = "127.0.0.1:8500"
+}
+
