@@ -14,6 +14,7 @@ server {
 
 client {
   enabled = true
+  network_interface = "eth1"
   servers =  [ "{{ vars.groups.servers | map('quote') | join('", "') }}"]
 {%for item in apps %}  
 

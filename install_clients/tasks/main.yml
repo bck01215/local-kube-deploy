@@ -12,6 +12,15 @@
   ansible.builtin.yum_repository:
     name: hashicorp
     description: Hashicorp Repo
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+  when:
+    - ansible_facts['distribution'] == "CentOS"
+
+- name: Add Hashicorp Repo
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    description: Hashicorp Repo
     baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
     gpgkey: https://rpm.releases.hashicorp.com/gpg
   when:
