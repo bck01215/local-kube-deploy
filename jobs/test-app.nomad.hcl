@@ -12,6 +12,12 @@ job "countdash" {
 
       connect {
         sidecar_service {}
+
+        sidecar_task {
+          config {
+            privileged = true
+          }
+        }
       }
     }
 
@@ -27,20 +33,25 @@ job "countdash" {
   group "dashboard" {
     network {
       mode = "bridge"
-
     }
 
     service {
       name = "count-dashboard"
       port = 9002
+
       tags = [
         "traefik.enable=true",
         "traefik.consulcatalog.connect=true",
-#        "traefik.http.routers.count-dashboard.rule=Host(`test.obs.com`)",
       ]
+
       connect {
+        sidecar_task {
+          config {
+            privileged = true
+          }
+        }
+
         sidecar_service {
-          tags = []
           proxy {
             upstreams {
               destination_name = "count-api"
