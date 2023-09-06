@@ -2,7 +2,7 @@
 - name: Install nomad
   ansible.builtin.dnf:
     name: nomad
-    state: latest
+    state: present
 
 - name: Add Firewall rules for Nomad
   ansible.builtin.firewalld:

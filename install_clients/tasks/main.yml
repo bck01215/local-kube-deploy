@@ -29,13 +29,13 @@
 - name: Add Podman
   ansible.builtin.dnf:
     name: podman
-    state: latest
+    state: present
 
 - name: Start and Enable Podman
   ansible.builtin.systemd:
     name: podman
     state: started
-    enabled: yes
+    enabled: true
 
 - import_tasks: consul.yml
 - import_tasks: nomad.yml

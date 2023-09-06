@@ -1,0 +1,18 @@
+[Unit]
+Description=Weed Master
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+
+ExecStart=/usr/bin/weed master \
+            -peers={{ vars.groups.servers | join(':9333,') }}:9333 \
+            -ip={{ vars.ansible_eth1.ipv4.address }} \
+            -metricsPort=9102
+WorkingDirectory=/usr/bin/
+SyslogIdentifier=weed-master
+
+[Install]
+WantedBy=multi-user.target

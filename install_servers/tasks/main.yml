@@ -7,6 +7,5 @@
     baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
     gpgkey: https://rpm.releases.hashicorp.com/gpg
 
-
 - import_tasks: consul.yml
 - import_tasks: nomad.yml

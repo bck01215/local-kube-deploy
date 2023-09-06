@@ -1,4 +1,3 @@
----
 - name: Install Nomad and Consul Server
   hosts: servers
   become: true
@@ -10,6 +9,9 @@
     - role: install_servers
       tags:
         - install_servers
+    - role: install_seaweed
+      tags:
+        - install_seaweed
 
 - name: Install Nomad and Consul Client
   hosts: clients

@@ -1,0 +1,33 @@
+# A sample TOML config file for SeaweedFS filer store
+# Used with "weed filer" or "weed server -filer"
+# Put this file to one of the location, with descending priority
+#    ./filer.toml
+#    $HOME/.seaweedfs/filer.toml
+#    /etc/seaweedfs/filer.toml
+
+[filer.options]
+recursive_delete = true
+
+
+[redis3_sentinel]
+enabled = false
+addresses = ["172.22.12.7:26379", "172.22.12.8:26379", "172.22.12.9:26379"]
+masterName = "master"
+username = ""
+password = ""
+database = 0
+
+[redis_cluster3]
+enabled = false
+addresses = [
+    "localhost:30001",
+    "localhost:30002",
+    "localhost:30003",
+    "localhost:30004",
+    "localhost:30005",
+    "localhost:30006",
+]
+password = ""
+# allows reads from slave servers or the master, but all writes still go to the master
+readOnly = false
+routeByLatency = false

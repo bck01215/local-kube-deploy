@@ -1,0 +1,28 @@
+---
+- name: Reload systemd
+  systemd:
+    daemon_reload: true
+
+- name: Restart weed-master Service
+  service:
+    name: weed-master
+    state: restarted
+    enabled: true
+
+- name: Restart weed-volume Service
+  service:
+    name: weed-volume
+    state: restarted
+    enabled: true
+
+- name: Restart redis
+  service:
+    name: redis
+    state: restarted
+    enabled: true
+
+- name: Restart sentinel
+  service:
+    name: redis-sentinel
+    state: restarted
+    enabled: true

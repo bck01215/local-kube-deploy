@@ -2,7 +2,7 @@
 - name: Install Consul
   ansible.builtin.dnf:
     name: consul
-    state: latest
+    state: present
 
 - name: Add Firewall rules
   ansible.builtin.firewalld:
@@ -25,7 +25,7 @@
 
 - name: Debug Default address
   debug:
-    msg: "It should be a 192 address for local testing {{vars.ansible_eth1.ipv4.address}}"
+    msg: "It should be a 192 address for local testing {{ vars.ansible_eth1.ipv4.address }}"
 
 - name: copy consul file
   ansible.builtin.template:

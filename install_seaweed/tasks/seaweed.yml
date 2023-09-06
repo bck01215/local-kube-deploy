@@ -1,0 +1,32 @@
+---
+- name: Download seaweedfs
+  unarchive:
+    src: "{{ weed_tar_gz }}"
+    dest: /usr/bin
+    remote_src: true
+  notify:
+    - Restart weed-master Service
+
+- name: Deploy weed-master Service
+  template:
+    src: weed-master.service.j2
+    dest: /etc/systemd/system/weed-master.service
+    mode: 0644
+  notify:
+    - Reload systemd
+    - Restart weed-master Service
+
+- name: Make seaweed directory
+  file:
+    path: "{{ weed_vol_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Deploy weed-volume Service
+  template:
+    src: weed-volume.service.j2
+    dest: /etc/systemd/system/weed-volume.service
+    mode: 0644
+  notify:
+    - Reload systemd
+    - Restart weed-volume Service

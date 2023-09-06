@@ -2,7 +2,7 @@
 - name: Install nomad
   ansible.builtin.dnf:
     name: nomad
-    state: latest
+    state: present
 
 - name: Add Firewall rules for Nomad
   ansible.builtin.firewalld:
@@ -19,7 +19,7 @@
 - name: Create needed directories
   ansible.builtin.file:
     state: directory
-    path: "{{ item}}"
+    path: "{{ item }}"
     mode: "0755"
   loop:
     - /opt/nomad/data/plugins/
@@ -36,6 +36,7 @@
   copy:
     src: bridge.conf
     dest: /etc/sysctl.d/bridge.conf
+    mode: "0644"
   notify: Restart Nomad
 
 - name: "Download and unarchive Podman plguin - {{ podman_plugin_url }}"
@@ -46,12 +47,11 @@
     owner: root
     group: root
     mode: "0755"
-    remote_src: yes
+    remote_src: true
   notify: Restart Nomad
   # environment:
   #   https_proxy: http://quidproxy.liberty.edu:3128
 
-  
 - name: Add volume dir Nomad
   ansible.builtin.file:
     path: /opt/nomad/data/volumes
@@ -61,12 +61,12 @@
 
 - name: Add app dirs Nomad
   ansible.builtin.file:
-    path: /opt/nomad/data/volumes/{{item}}
+    path: /opt/nomad/data/volumes/{{ item }}
     state: directory
     mode: "0755"
   notify: Restart Nomad
   loop: "{{ apps }}"
-  
+
 - name: copy Nomad file
   ansible.builtin.template:
     src: nomad.hcl
