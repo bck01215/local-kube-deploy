@@ -30,3 +30,26 @@
   notify:
     - Reload systemd
     - Restart weed-volume Service
+
+- name: Deploy weed-filer dir
+  file:
+    path: /etc/seaweedfs/
+    state: directory
+    mode: 0755
+
+- name: Deploy weed-filer Config
+  template:
+    src: weed-filer.toml.j2
+    dest: /etc/seaweedfs/filer.toml
+    mode: 0644
+  notify:
+    - Restart weed-filer Service
+
+- name: Deploy weed-filer Service
+  template:
+    src: weed-filer.service.j2
+    dest: /etc/systemd/system/weed-filer.service
+    mode: 0644
+  notify:
+    - Reload systemd
+    - Restart weed-filer Service

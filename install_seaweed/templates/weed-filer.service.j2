@@ -1,0 +1,18 @@
+[Unit]
+Description=Weed Volume
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+
+ExecStart=/usr/bin/weed filer \
+            -master={{ vars.groups.servers | join(':9333,') }}:9333 \
+            -ip={{ vars.ansible_eth1.ipv4.address }} \
+            -metricsPort=9104
+WorkingDirectory=/usr/bin/
+SyslogIdentifier=weed-volume
+
+[Install]
+WantedBy=multi-user.target
