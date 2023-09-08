@@ -1,31 +1,31 @@
 job "seaweedfs-csi" {
   datacenters = ["obs"]
   region      = "global"
-  type = "system"
+  type        = "system"
 
   update {
-    max_parallel  = 1
-    stagger       = "60s"
+    max_parallel = 1
+    stagger      = "60s"
   }
 
   group "nodes" {
-  
+
     ephemeral_disk {
       migrate = false
       size    = 10240
       sticky  = false
     }
-      
+
     task "plugin" {
       driver = "podman"
 
       config {
-        image = "docker.io/chrislusf/seaweedfs-csi-driver:v1.1.8"
+        image        = "docker.io/chrislusf/seaweedfs-csi-driver:v1.1.8"
         network_mode = "host"
 
         args = [
           "--endpoint=unix://csi/csi.sock",
-          "--filer=sever1:8888,server2:8888,server3:8888",
+          "--filer=weed-filer.service.consul:8888",
           "--nodeid=${node.unique.name}",
           "--cacheCapacityMB=256",
           "--cacheDir=${NOMAD_TASK_DIR}/cache_dir",
@@ -41,8 +41,8 @@ job "seaweedfs-csi" {
       }
 
       resources {
-        cpu    = 512
-        memory = 1024
+        cpu        = 512
+        memory     = 1024
         memory_max = 3072 # W need to have memory oversubscription enabled
       }
     }

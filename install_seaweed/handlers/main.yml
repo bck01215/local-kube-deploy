@@ -32,3 +32,9 @@
     name: redis-sentinel
     state: restarted
     enabled: true
+
+- name: Restart consul Service
+  service:
+    name: consul
+    state: restarted
+    enabled: true

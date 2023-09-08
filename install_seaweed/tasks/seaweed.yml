@@ -53,3 +53,11 @@
   notify:
     - Reload systemd
     - Restart weed-filer Service
+
+- name: Deploy weed consul service
+  copy:
+    src: weed-consul.hcl
+    dest: /etc/consul.d/weed-consul.hcl
+    mode: 0644
+  notify:
+    - Restart consul Service
