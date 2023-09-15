@@ -1,6 +1,8 @@
 ---
-weed_tar_gz: https://github.com/seaweedfs/seaweedfs/releases/download/3.55/linux_amd64_full_large_disk.tar.gz
-weed_vol_dir: /mnt
+minio_rpm: minio-20230907020502.0.0.x86_64.rpm
+minio_url: "https://dl.min.io/server/minio/release/linux-amd64/archive/{{ minio_rpm }}"
+minio_user: test
+minio_pass: testpassword
 redis_master: 192.168.56.56
 redis_pass: !vault |
   $ANSIBLE_VAULT;1.1;AES256

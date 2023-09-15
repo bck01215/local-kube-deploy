@@ -3,9 +3,8 @@
 ## Vagrant setup
 
 ```bash
-vagrant box add --provider virtualbox generic/rhel8
-vagrant box add --provider virtualbox generic/fedora34 # Instead of RHEL 9 because of package management issues
-vagrant up
+vagrant box add --provider virtualbox generic/centos9s
+VAGRANT_EXPERIMENTAL="disks" vagrant up
 vagrant ssh-config # compare with inventory.ini for port and key settings
 ```
 
@@ -33,4 +32,16 @@ Exists on the master seaweed node port 9333. To find the master run the followin
 
 ```bash
 curl http://localhost:9333/cluster/status?pretty=y
+```
+
+### Troubleshooting
+
+After a catastrophe (All masters, volumes, and filers fail) it may be necessary to restart all services. Order does matter.
+
+```bash
+
+systemctl restart weed-mster.service
+systemctl restart weed-volume.service
+systemctl restart weed-filer.service
+
 ```

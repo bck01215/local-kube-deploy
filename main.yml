@@ -9,9 +9,9 @@
     - role: install_servers
       tags:
         - install_servers
-    - role: install_seaweed
+    - role: install_minio
       tags:
-        - install_seaweed
+        - install_minio
 
 - name: Install Nomad and Consul Client
   hosts: clients

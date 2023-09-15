@@ -3,21 +3,9 @@
   systemd:
     daemon_reload: true
 
-- name: Restart weed-master Service
+- name: Restart Minio Service
   service:
-    name: weed-master
-    state: restarted
-    enabled: true
-
-- name: Restart weed-volume Service
-  service:
-    name: weed-volume
-    state: restarted
-    enabled: true
-
-- name: Restart weed-filer Service
-  service:
-    name: weed-filer
+    name: minio
     state: restarted
     enabled: true
 
@@ -33,7 +21,7 @@
     state: restarted
     enabled: true
 
-- name: Restart consul Service
+- name: Restart Consul Service
   service:
     name: consul
     state: restarted

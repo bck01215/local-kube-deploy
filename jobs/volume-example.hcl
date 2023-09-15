@@ -2,10 +2,10 @@ job "example-seaweedfs-app" {
   datacenters = ["obs"]
 
   group "apps" {
-    volume "example-seaweedfs-volume" {
+    volume "gitlab" {
       type            = "csi"
-      source          = "example-seaweedfs-volume"
-      access_mode     = "multi-node-multi-writer"
+      source          = "gitlab"
+      access_mode     = "single-node-writer"
       attachment_mode = "file-system"
     }
 
@@ -24,9 +24,14 @@ job "example-seaweedfs-app" {
       }
 
       volume_mount {
-        volume = "example-seaweedfs-volume"
+        volume      = "gitlab"
         destination = "/mnt/pv"
       }
+      volume_mount {
+        volume      = "gitlab"
+        destination = "/mnt/pv2"
+      }
+
     }
   }
 }

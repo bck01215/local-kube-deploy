@@ -10,6 +10,7 @@ dir /var/lib/redis
 
 protected-mode no
 
+appendonly yes
 {%if inventory_hostname != redis_master%}
 replicaof  {{ redis_master }} 6379
 {% endif %}

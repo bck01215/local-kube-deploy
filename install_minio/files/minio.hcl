@@ -1,5 +1,5 @@
 service {
-  name = "weed-filer"
+  name = "minio"
 
   tags = [
     "traefik.enable=true",
@@ -7,9 +7,9 @@ service {
   ]
 
   check = {
-    http     = "http://localhost:8888"
+    http     = "http://localhost:9001"
     interval = "15s"
     timeout  = "1s"
   }
-  port = 8888
+  port = 9001
 }
