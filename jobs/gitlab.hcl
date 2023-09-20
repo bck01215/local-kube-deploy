@@ -7,18 +7,30 @@ job "gitlab" {
       source          = "gitlab-data-vol"
       access_mode     = "multi-node-multi-writer"
       attachment_mode = "file-system"
+      mount_options {
+        mount_flags = ["writeback_cache"]
+      }
+
     }
     volume "gitlab-logs" {
       type            = "csi"
       source          = "gitlab-log-vol"
       access_mode     = "multi-node-multi-writer"
       attachment_mode = "file-system"
+      mount_options {
+        mount_flags = ["writeback_cache"]
+      }
+
     }
     volume "gitlab-config" {
       type            = "csi"
       source          = "gitlab-config-vol"
       access_mode     = "multi-node-multi-writer"
       attachment_mode = "file-system"
+      mount_options {
+        mount_flags = ["writeback_cache"]
+      }
+
     }
     network {
       mode = "bridge"
