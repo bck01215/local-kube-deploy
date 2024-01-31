@@ -1,2 +1,2 @@
 .vagrant*
-inventory.ini
+ssh.cfg

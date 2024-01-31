@@ -1,6 +1,0 @@
----
-# vars file for install_clients
-cni_archive: https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-amd64-v1.3.0.tgz
-podman_plugin_url: https://releases.hashicorp.com/nomad-driver-podman/0.5.1/nomad-driver-podman_0.5.1_linux_amd64.zip
-apps:
-  - grafana
