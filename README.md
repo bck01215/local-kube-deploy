@@ -11,8 +11,15 @@ Install [libvirt for vagrant](https://vagrant-libvirt.github.io/vagrant-libvirt/
 
 After loading env vars run the following:
 ```bash
-vagrant box add --provider libvirt fedora/39-cloud-base
+vagrant box add --provider virtualbox generic/fedora38
 vagrant up
-vagrant ssh-config # compare with inventory.ini for port and key settings
-vagrant ssh-config > ssh.cfg # for ansible
+rebootvagrant ssh-config > ssh.cfg # for ansible
 ```
+### Kube Config Setup
+You'll need to copy the kube config from server1. 
+There are many ways to proceed from here.
+Personally I extracted the cluster, context, and user section. 
+I then modified the names to make them appropriate. The context is expected to be called `k3s` to fit the .envrc.
+
+#### TODO: 
+    - [ ] Automate copying data to kube/config
