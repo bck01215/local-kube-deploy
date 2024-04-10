@@ -12,8 +12,12 @@ Install [libvirt for vagrant](https://vagrant-libvirt.github.io/vagrant-libvirt/
 After loading env vars run the following:
 ```bash
 vagrant box add --provider virtualbox generic/fedora38
-vagrant up
-rebootvagrant ssh-config > ssh.cfg # for ansible
+vagrant up server1
+vagrant up server2 server3
+vagrant ssh-config > ssh.cfg
+mkdir .kube
+ssh -F ssh.cfg vagrant@server1 'sudo cat /root/.kube/config' > .kube/config
+❯ sed -i 's/127.0.0.1/192.168.57.33/g' .kube/config 
 ```
 ### Kube Config Setup
 You'll need to copy the kube config from server1. 
